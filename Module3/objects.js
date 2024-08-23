@@ -1,4 +1,4 @@
-// 2 ways to create JS object   (JSON)
+// 2 ways to create JS object 
 // 1. Create an Object with an object literal i.e, {} (preferred)
 let obj1 = {};
 
