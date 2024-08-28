@@ -30,29 +30,41 @@ const isBooleanInputValid = function(input){
   return (input == "yes" || input == "no");
 }
 
-const isStartYearValid = function(input){
-  let numVal = Number(input);
-  if(!Number.isInteger(numVal) || numVal < 1990 || numVal > 2024){
-    return false;
+// const isStartYearValid = function(input){
+//   let numVal = Number(input);
+//   if(!Number.isInteger(numVal) || numVal < 1990 || numVal > 2024){
+//     return false;
+//   }
+//   return true;
+// }
+
+// const isStartMonthValid = function(input){
+//   let numValue = Number(input);
+//   if(!Number.isInteger(numValue) || numValue < 1 || numValue > 12){
+//     return false;
+//   }
+//   return true;
+// }
+
+// const isStartDayValid = function(input){
+//   let numValue = Number(input);
+//   if(!Number.isInteger(numValue) || numValue < 1 || numValue > 31){
+//     return false;
+//   }
+//   return true;
+// }
+
+const isIntegerValid = (min, max) => {
+  return (input) => {
+    let numValue = Number(input);
+    if(!Number.isInteger(numValue) || numValue < min || numValue > max){
+      return false;
+    }
+    return true;
   }
-  return true;
 }
 
-const isStartMonthValid = function(input){
-  let numValue = Number(input);
-  if(!Number.isInteger(numValue) || numValue < 1 || numValue > 12){
-    return false;
-  }
-  return true;
-}
 
-const isStartDayValid = function(input){
-  let numValue = Number(input);
-  if(!Number.isInteger(numValue) || numValue < 1 || numValue > 31){
-    return false;
-  }
-  return true;
-}
 // Application commands functions -------------------------------------
 function listEmployees(){
   console.log(`Employee List ----------------------------`);
@@ -74,9 +86,9 @@ function addEmployee(){
   let employee = {};
   employee.firstName = getInput("First Name: ", isStringInputValid);
   employee.lastName = getInput("Last Name: ", isStringInputValid);
-  let startDateYear = getInput("Employee start year (1990 - 2024): ", isStartYearValid);
-  let startDateMonth = getInput("Employee start month (1 - 12): ", isStartMonthValid);
-  let startDateDay = getInput("Employee start day (1 - 31): ", isStartDayValid);
+  let startDateYear = getInput("Employee start year (1990 - 2024): ", isIntegerValid(1990, 2023));
+  let startDateMonth = getInput("Employee start month (1 - 12): ", isIntegerValid(1, 12));
+  let startDateDay = getInput("Employee start day (1 - 31): ", isIntegerValid(1, 31));
   employee.startDdate = new Date(startDateYear, startDateMonth - 1, startDateDay);
   employee.isActive = getInput("Is employee active (yes or no): ", isBooleanInputValid, transformerBooleanValue);
 
